@@ -8,14 +8,9 @@ import {
   Animated,
   TouchableOpacity,
 } from 'react-native';
-// import Swipeable from 'react-native-gesture-handler/Swipeable';
-// import { GestureHandler } from 'expo';
-// const { Swipeable } = GestureHandler;
 
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-
-
 
 
 export const Separator = () => <View style={styles.separator} />;

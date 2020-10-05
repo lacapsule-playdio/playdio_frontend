@@ -8,14 +8,10 @@ import {
     TouchableOpacity,
     Switch
 } from 'react-native';
-import ip from '../../variables';
-// import Swipeable from 'react-native-gesture-handler/Swipeable';
-// import { GestureHandler } from 'expo';
-// const { Swipeable } = GestureHandler;
-
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import {connect} from 'react-redux'
+import Constants from 'expo-constants';
 
 export const Separator = () => <View style={styles.separator} />;
 
@@ -77,10 +73,6 @@ const RightActions = (progress, dragX, onPress) => {
 };
 
 
-
-
-
-
 const ListItemSwap = ({ id, text,firstName, lastName, avatar,gradeType,namePlaylist,idUser,idDelete,playlistId,button,delUser},props) =>{
 
     const[selected, setSelected]=useState(false);
@@ -98,14 +90,14 @@ useEffect(()=>{
     async function changeGrade(idUser,namePlaylist){
 
         if(colorIcon==='#796221'){
-            var requestBDD = await fetch(`${ip}/userAdmin`,{
+            var requestBDD = await fetch(`${Constants.manifest.extra.backendURL}/userAdmin`,{
             method:"POST",
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             body:`idUser=${idUser}&namePlaylist=${namePlaylist}&gradeType=composer`
         })
         setColorIcon('#C0C0C0')
         }else if(colorIcon==='#C0C0C0'){
-                var requestBDD = await fetch(`${ip}/userAdmin`,{
+                var requestBDD = await fetch(`${Constants.manifest.extra.backendURL}/userAdmin`,{
                 method:"POST",
                 headers: {'Content-Type':'application/x-www-form-urlencoded'},
                 body:`idUser=${idUser}&namePlaylist=${namePlaylist}&gradeType=public`
@@ -117,7 +109,7 @@ useEffect(()=>{
     const swipeableRef = useRef(null);
     const deleteUser =async (item,idDelete,namePlaylist) => {
         if(gradeType){
-        var requestBDD = await fetch(`${ip}/deleteUser`,{
+        var requestBDD = await fetch(`${Constants.manifest.extra.backendURL}/deleteUser`,{
                 method:"POST",
                 headers: {'Content-Type':'application/x-www-form-urlencoded'},
                 body:`idDelete=${idDelete}&namePlaylist=${namePlaylist}`
@@ -129,11 +121,9 @@ useEffect(()=>{
 }
 
 
-
-
 const addUser = async function (idUser,playlistId){
     if(!gradeType){
-        var requestBDD = await fetch(`${ip}/addUser`,{
+        var requestBDD = await fetch(`${Constants.manifest.extra.backendURL}/addUser`,{
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         method:"POST",
         body:`idUser=${idUser}&playlistId=${playlistId}`
@@ -143,12 +133,6 @@ const addUser = async function (idUser,playlistId){
 }
 
 
-/* const closeSwipeable = (item) => {
-   console.log("evenement", item)
-props.deleteSong(item)
-
-  
-} */
 if(button==='search'&& selected){
     return(
         <View style={styles.container}>

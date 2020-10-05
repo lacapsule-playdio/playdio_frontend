@@ -33,7 +33,6 @@ import SearchResult from './screens/components/SearchResult'
 import SelectUser from './screens/selectUser'
 import CreateRadioValidation from './screens/CreateRadioValidation'
 
-
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import play from './reducers/play'
@@ -47,9 +46,6 @@ import deleteRadio from './reducers/deleteRadio';
 /* import { forNoAnimation } from 'react-navigation-stack/lib/typescript/src/vendor/TransitionConfigs/CardStyleInterpolators'; */
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
-
-
-//const store = createStore(combineReducers({wishList, token, selectedLang}))
 
 const store = createStore(combineReducers({email,PlaylistAdd,songId, radioId,DeleteUser,play, deleteRadio}))
 
@@ -75,7 +71,7 @@ var BottomNavigator = createBottomTabNavigator({ // Creation du menu bottom avec
       iconName = 'ios-play';
       return <Ionicons name={iconName} size={25} color={tintColor} />;
       }
-   // return <Ionicons name={iconName} size={25} color={tintColor} />;
+   
     },
   }),
       tabBarOptions: {

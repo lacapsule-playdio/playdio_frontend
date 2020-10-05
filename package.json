@@ -14,11 +14,13 @@
     "@react-navigation/native": "^5.5.0",
     "@use-expo/font": "^2.0.0",
     "base-64": "^0.1.0",
+    "dotenv": "^8.2.0",
     "eslint": "^7.1.0",
     "expo": "^37.0.0",
     "expo-auth-session": "~1.2.1",
     "expo-av": "~8.1.0",
     "expo-font": "~8.1.0",
+    "expo-linking": "~1.0.1",
     "native-base": "^2.13.12",
     "react": "16.9.0",
     "react-dom": "16.9.0",
@@ -48,7 +50,7 @@
     "save": "^2.4.0",
     "spotify-web-api-js": "^1.4.0",
     "spotify-web-api-node": "^4.0.0",
-    "expo-linking": "~1.0.1"
+    "expo-constants": "~9.0.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^8.1.0",

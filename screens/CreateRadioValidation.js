@@ -1,19 +1,15 @@
+console.disableYellowBox = true; 
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,AsyncStorage, Share} from 'react-native';
 import { ListItem,Button, Header, Avatar,Icon} from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Song';
 import Profile from './components/Profile';
 import {connect} from 'react-redux';
-// import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { useFonts } from '@use-expo/font'
 import * as Linking from 'expo-linking';
-
-
 import police from '../screens/components/font';
-
 import  {TextField,  FilledTextField, OutlinedTextField,}  from 'react-native-material-textfield';
-
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 function CreateRadioValidation(props) {

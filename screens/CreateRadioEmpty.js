@@ -1,10 +1,11 @@
+console.disableYellowBox = true; 
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,Switch,FlatList} from 'react-native';
 import { ListItem,Button,ButtonGroup,Avatar } from 'react-native-elements'
 import {connect} from 'react-redux';
 import SearchComponent, { Separator } from './components/SearchResult';
 import Profile from './components/Profile';
-import ip from '../variables';
+import Constants from 'expo-constants';
 
 import police from '../screens/components/font';
 
@@ -39,7 +40,7 @@ const [refresh,setRefresh]=useState(false)
       let idplaylistSpotify =props.playlistUser.idSpotifPlaylist
       let userIdSpotify = props.playlistUser.infoUser.idSpotify
       async function recupDonnée(){
-        var requestBDD = await fetch(`${ip}/playlist-item`,{
+        var requestBDD = await fetch(`${Constants.manifest.extra.backendURL}/playlist-item`,{
           method:"POST",
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
           body:`idPlayslistSpotifyFromFront=${idplaylistSpotify}&idSpotify=${userIdSpotify}`
@@ -83,7 +84,7 @@ useEffect(()=>{
 
           props.addSong({position:props.playlistUser.listMusic.length,name:nameTitle,artist:artist,image:image,spotifyId:idSpotify,type:type,isrcID:isrc,from:from,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album})
         })
-    }else {console.log("recup ko")}
+    }else {}
   },[listMusicFromBack])    
 
 
@@ -101,7 +102,7 @@ useEffect(()=>{
   
   async function recupDonnée(){
     let userIdSpotify = props.playlistUser.infoUser.idSpotify
-    var requestBDD = await fetch(`${ip}/user-search`,{
+    var requestBDD = await fetch(`${Constants.manifest.extra.backendURL}/user-search`,{
       method:"POST",
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body:`search_term=${searchText}&userId=${userIdSpotify}`
@@ -117,7 +118,7 @@ useEffect(()=>{
 
 let listOfResult=[]
 const [arrayResult,setArrayResult] =useState()
-console.log("recup position from",props.playlistUser.listMusic.length)
+
 useEffect(()=>{
   let info = searchJSON
   
@@ -148,9 +149,7 @@ useEffect(()=>{
       setArrayResult(listOfResult)
              
       })
-  }else {
-      console.log("ko")
-  }
+  }else {}
 },[searchJSON])
 
 // Setter boutton
@@ -202,7 +201,7 @@ let validPlaylist =async ()=>{
   let result = JSON.stringify(props.playlistUser);
 
   let resultEncoded = encodeURIComponent(result)
-  var requestBDD = await fetch(`${ip}/radio-create`,{
+  var requestBDD = await fetch(`${Constants.manifest.extra.backendURL}/radio-create`,{
     method:'post',
     headers: {'Content-Type':'application/x-www-form-urlencoded'},
     body:`resultat=${resultEncoded}`
@@ -210,7 +209,6 @@ let validPlaylist =async ()=>{
 
 
   var reponse = await requestBDD.json()
-  console.log("response du back", reponse)
 
   setSearchJSONResultSend(reponse)
   props.addUrl(reponse)

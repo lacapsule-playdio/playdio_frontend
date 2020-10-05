@@ -24,7 +24,6 @@ function Radio(props) {
   let conv = urlLien.toString() 
   urlLien était mis dans le () du onPress*/
 
-
   return (
     <TouchableOpacity onPress={() => {props.navigation.navigate(props.url), props.addRadioId(props.radioId)}}>
         <View style={styles.cardView}>

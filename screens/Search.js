@@ -1,3 +1,4 @@
+console.disableYellowBox = true; 
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header } from 'react-native-elements'

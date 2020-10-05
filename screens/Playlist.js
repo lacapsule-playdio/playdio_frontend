@@ -1,20 +1,18 @@
+console.disableYellowBox = true; 
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList, AsyncStorage, TouchableHighlight, TouchableOpacity } from 'react-native';
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header,Overlay } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/Song';
 import Track from './components/Track';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-// import * as Font from 'expo-font';
 import { AppLoading } from 'expo-font';
 import { useFonts} from '@use-expo/font'
-import ip from '../variables';
 import { ResponseError } from 'expo-auth-session/build/Errors';
 import {connect} from 'react-redux';
 import Profile from './components/Profile';
-
+import Constants from 'expo-constants';
 
 function Playlist(props) {
-/* const [listUser,setListUser]=useEffect() ;  */
 
   let listTest = [
     {name:"david",url:"https://randomuser.me/api/portraits/men/41.jpg"},
@@ -32,7 +30,6 @@ function Playlist(props) {
   ]
 
 
-
 // Get a radio playlist from DB
 
 const [playlistRadio, setPlaylistRadio] = useState([]);
@@ -43,7 +40,7 @@ useEffect( () =>{
   
     fetchPlaylist = async () => {
       
-      var request = await fetch(`${ip}/radio-playlist`,{
+      var request = await fetch(`${Constants.manifest.extra.backendURL}/radio-playlist`,{
         method:"POST",
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body:`radioId=${props.radioId}`
@@ -109,7 +106,7 @@ playlistRadio.map((track,i)=>{
 
   var deleteRadio = async () => {
 
-    var request = await fetch(`${ip}/radio-delete`,{
+    var request = await fetch(`${Constants.manifest.extra.backendURL}/radio-delete`,{
       method:"POST",
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body:`radioId=${props.radioId}`

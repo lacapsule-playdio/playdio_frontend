@@ -1,11 +1,12 @@
+console.disableYellowBox = true; 
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, FlatList, TouchableHighlight,Swi } from 'react-native';
 import { Avatar,ButtonGroup, Badge, Icon, withBadge, Card, List, ListItem, Image, Header } from 'react-native-elements'
 import ListItemSwap, { Separator } from './components/userplaylist';
 import  {TextField}  from 'react-native-material-textfield';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import ip from '../variables';
 import {connect} from 'react-redux';
+import Constants from 'expo-constants';
 
 function selectUser(props) {
 const [firstName,setFirstName]=useState('')
@@ -16,12 +17,12 @@ const[search,setSearch]=useState("")
 const [resultUser,setResultUser]=useState('')
 const [playlistId,setPlaylistId]=useState('')
 
-/* modifier le fetch pour envoiye le nom de la playlist quan elle sera implementer dans l'appli */
+
 useEffect(()=>{
     var tableau = []
     async function checkUserPlaylist(){
         var button="orchestra"
-    var requestBDD = await fetch(`${ip}/userListplaylist`,{
+    var requestBDD = await fetch(`${Constants.manifest.extra.backendURL}/userListplaylist`,{
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         method:"POST",
         body:`playlistID=${props.radioId}`
@@ -45,7 +46,7 @@ useEffect(()=>{
         var button="search"
         async function userSearch(){
         if(searchText){    
-        var requestBDD = await fetch(`${ip}/userList`,{
+        var requestBDD = await fetch(`${Constants.manifest.extra.backendURL}/userList`,{
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             method:"POST",
             body:`firstName=${searchText}`

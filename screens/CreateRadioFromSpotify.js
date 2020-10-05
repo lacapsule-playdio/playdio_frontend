@@ -1,24 +1,18 @@
+console.disableYellowBox = true; 
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,SafeAreaView, ScrollView ,FlatList,TouchableOpacity} from 'react-native';
-
 import { ListItem,Button,ButtonGroup, Avatar } from 'react-native-elements'
 import SearchComponent, { Separator } from './components/SearchResult';
 import Profile from './components/Profile';
-import ip from '../variables';
-
 import police from './components/font';
-
 import { TextField } from 'react-native-material-textfield';
-
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
 import {connect} from 'react-redux';
+import Constants from 'expo-constants';
 
 // import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { useFonts } from '@use-expo/font'
-
-
 
 function CreateRadio2(props) {
 
@@ -28,10 +22,6 @@ const [send, setSender] = useState(false);
 
 /* Spotify : Get playlist informations */
 
-//Matthieu  http://192.168.1.43
-// IP Marion http://192.168.1.25
-//IP Ben http://192.168.1.43
-
 let idSpotify = props.playlistUser.infoUser.idSpotify
 
 const [playlistUser,setPlaylistUser] =useState();
@@ -40,13 +30,12 @@ const [playlistUser,setPlaylistUser] =useState();
 useEffect(()=>{
   
     async function recupDonnée(){
-      var requestBDD = await fetch(`${ip}/user-playlist`,{
+      var requestBDD = await fetch(`${Constants.manifest.extra.backendURL}/user-playlist`,{
         method:"POST",
         headers: {'Content-Type':'application/x-www-form-urlencoded'},
         body:`idSpotify=${idSpotify}`
       })
       var reponse = await requestBDD.json()
-        // console.log(reponse)
       setPlaylistUser(reponse)
     }
     recupDonnée()
@@ -81,9 +70,7 @@ useEffect(()=>{
           setArrayPlaylist(listOfPlaylist)
          })
 
-     }else {
-         console.log(" ko")
-     }
+     }else {}
 
 
   },[playlistUser])
@@ -103,9 +90,7 @@ let filteredPlaylist=[] ;
         return itemData.indexOf(textData) > -1;
         });
 
-   }else{
-       console.log("waiting ")
-   }
+   }else{}
  
   return (
     

@@ -1,15 +1,14 @@
+console.disableYellowBox = true; 
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View, ScrollView, AsyncStorage} from 'react-native';
 import { Avatar, Badge, Icon, withBadge,Card,List,ListItem, Image, Header,Overlay } from 'react-native-elements'
 import Radio from './components/Radio';
 import Profile from './components/Profile';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-// import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { useFonts} from '@use-expo/font'
-import ip from '../variables';
 import {connect} from 'react-redux';
-
+import Constants from 'expo-constants';
 
 function Home(props) {
 
@@ -24,7 +23,7 @@ function Home(props) {
         var infoUser = await AsyncStorage.getItem('user');
         var userData = JSON.parse(infoUser);
         
-        var request = await fetch(`${ip}/radio`,{
+        var request = await fetch(`${Constants.manifest.extra.backendURL}/radio`,{
           method:"POST",
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
           body:`userId=${userData.id}`

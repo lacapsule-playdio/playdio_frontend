@@ -1,12 +1,8 @@
 import React,{useState} from 'react';
-
 import * as AuthSession from 'expo-auth-session';
 import { encode as btoa } from 'base-64';
 import getAuthorizationCode from './getAuthorizationCode';
-import ip from '../../variables';
-
-
-
+import Constants from 'expo-constants';
 
 export default async function getTokens(clientId,redirectURI,clientSecret,props){
 
@@ -24,13 +20,7 @@ export default async function getTokens(clientId,redirectURI,clientSecret,props)
       }`,
     });
     const responseJson = await response.json();
-    var requestbackend = await fetch(`${ip}/saveToken`,{
-
-//Matthieu  http://192.168.1.8
-// IP Marion http://192.168.1.25
-//IP Ben http://192.168.1.43
-// IP Dim http://192.168.0.25
-
+    var requestbackend = await fetch(`${Constants.manifest.extra.backendURL}/saveToken`,{
       method:'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body: `refreshToken=${responseJson.refresh_token}&accessToken=${responseJson.access_token}`

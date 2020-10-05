@@ -1,16 +1,12 @@
 console.disableYellowBox = true; 
 import React,{useState,useEffect} from 'react';
 import {ImageBackground,StyleSheet,View, AsyncStorage} from 'react-native';
-
 import {Button,Text,Icon,} from 'react-native-elements'
 import * as AuthSession from 'expo-auth-session';
 import getAuthorizationCode from '../screens/components/getAuthorizationCode';
 import getTokens from '../screens/components/getTokens';
-import ip from '../variables';
+import Constants from 'expo-constants';
 
-/* import * as Font from 'expo-font'; */
-
-// import police from '../screens/components/font'
 
 import { AppLoading } from 'expo';
 import { useFonts } from '@use-expo/font';
@@ -24,33 +20,17 @@ function connectAPP({navigation,saveEmailUser}) {
   AsyncStorage.getItem('user',function(error,data){
                   var userData = JSON.parse(data)
                   if (userData !== null) {
-      // We have data!!
+   
      navigation.navigate("Home")
     }
 
                 })
  
-  // var fontPermanentMarker =''
-  // var fontRoboto =''
-  // const [font,setFont]= useState(false)
-
-// useEffect( ()=>{
-//   police()
-//   setFont(true);
-//     if(font ==true){ 
-//     fontPermanentMarker = 'PermanentMarker'
-//     fontRoboto = 'Roboto'
-//   }
-// },[])
+ 
 async function autoriseSpotify(){
 
-  var infoClientID = await fetch (`${ip}/autorisation`)
+  var infoClientID = await fetch (`${Constants.manifest.extra.backendURL}/autorisation`)
   
-
-// ip matthieu http://192.168.1.43
-// IP Marion http://192.168.1.25
-// IP Ben http://192.168.1.43
-// IP Dim http://192.168.0.25
 
   var reponse = await infoClientID.json()
   
@@ -183,7 +163,6 @@ function mapDispatchToProps(dispatch) {
     }
   }
 }
-
 
 export default connect(
   null,

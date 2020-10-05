@@ -7,11 +7,7 @@ import {
   Animated,
   TouchableOpacity,
 } from 'react-native';
-// import Swipeable from 'react-native-gesture-handler/Swipeable';
-// import { GestureHandler } from 'expo';
-// const { Swipeable } = GestureHandler;
 import {connect} from 'react-redux';
-
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
@@ -37,18 +33,12 @@ const styles = StyleSheet.create({
     flex: hp('0.3%'),
     alignItems: 'flex-end',
   },
-/*   actionText: {
-    color: '#fff',
-    fontWeight: '600',
-
-  }, */
 });
 
 function SearchResultComponent(props) {
 
 
   let validPlaylist = (idPlaylistItem,type)=>{
-    console.log("recup position",props.playlistUser)
 
     if (type=="playlist"){
       
@@ -57,20 +47,7 @@ function SearchResultComponent(props) {
       props.navigation.navigate('AddRadioEmpty')
 
     }else if(props.from=="search"){
-/*     let id=props.position
-      let name =props.name
-      let text =props.text
-      let url= props.url
-      let spotifyId = props.idSpotify
-      let type=props.type
-      let isrc = props.isrc
 
-
-      let ajoutObjet={id:id,name:name,text:text,url:url,spotifyId:spotifyId,type:type,isrc:isrc}
-
-      props.addSong(ajoutObjet)
-
- */
       let id=props.playlistUser.listMusic.length
       let nameTitle = props.name
       let artist = props.artist
@@ -86,7 +63,6 @@ function SearchResultComponent(props) {
       let from="playlist"
 
       let ajoutObjet={from:from,position:props.playlistUser.listMusic.length,name:nameTitle,artist:artist,image:image,spotifyId:idSpotify,type:type,isrcID:isrc,href:href,externalUrl:externalUrl,previewUrl:previewUrl,uri:uri,album:album}
-    console.log(ajoutObjet)
       props.addSong(ajoutObjet)
 
 
@@ -117,7 +93,7 @@ let RightActions = (progress, dragX, onPress) => {
   
 
 };
-//console.log("recup position",props.playlistUser.listMusic.length)
+
 
 const[selected, setSelected]=useState(false);
 
@@ -126,7 +102,7 @@ const swipeableRef = useRef(null);
  const closeSwipeable = (item) => {
 
 let value =props.position
-console.log("recup item",value)
+
 props.deleteSong(value)
   swipeableRef.current.close();
 }
@@ -218,8 +194,6 @@ export const Separator = (props) => <View style={styles.separator} />;
 
 
 
-
-
 function mapDispatchToProps(dispatch) {
   return {
     addplaylist: function(info) { 
@@ -246,5 +220,3 @@ export default connect(
     mapDispatchToProps
 )(SearchResultComponent);
 
-
-//export default SearchResultComponent;

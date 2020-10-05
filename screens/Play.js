@@ -1,3 +1,4 @@
+console.disableYellowBox = true; 
 import React, {useState, useEffect} from 'react';
 import { StyleSheet, TouchableOpacity, View, Image, Text, FlatList, SafeAreaView, AsyncStorage } from 'react-native'
 import { Tooltip, Slider, Header, Avatar } from 'react-native-elements';
@@ -5,8 +6,8 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { Audio } from 'expo-av';
 import ListItemSwap, { Separator } from './components/Song';
 import {connect} from 'react-redux';
-import ip from '../variables';
 import Profile from './components/Profile';
+import Constants from 'expo-constants';
 
 // ----------------------------------------
 // PLAY FUNCTION
@@ -35,7 +36,7 @@ function Play(props) {
   useEffect( () =>{
       fetchPlaylist = async () => {
         
-        var request = await fetch(`${ip}/radio-playlist`,{
+        var request = await fetch(`${Constants.manifest.extra.backendURL}/radio-playlist`,{
           method:"POST",
           headers: {'Content-Type':'application/x-www-form-urlencoded'},
           body:`radioId=${props.radioId}`

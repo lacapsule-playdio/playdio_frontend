@@ -2,20 +2,13 @@ console.disableYellowBox = true;
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,AsyncStorage } from 'react-native';
 import  {TextField,  FilledTextField, OutlinedTextField,}  from 'react-native-material-textfield';
-import ip from '../variables';
-
 import {Button,Input} from 'react-native-elements'
-
 import {connect} from 'react-redux'
-
-
-
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import Constants from 'expo-constants';
+
 function connectSignUp(props) {
-  
-//Matthieu  http://192.168.1.43
-// IP Marion http://192.168.1.25
-//IP Ben http://192.168.1.43
+
 
 const [email,setEmail]=useState('email@email.com')
 const [firstName,setFirstName]=useState('')
@@ -23,7 +16,7 @@ const [lastName,setLastName]=useState('')
 const [password,setPassword]=useState('')
 useEffect(()=>{
   async function recupDonnée(){
-    var requestBDD = await fetch(`${ip}/infoSignUp`,{
+    var requestBDD = await fetch(`${Constants.manifest.extra.backendURL}/infoSignUp`,{
       method:"POST",
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
       body:`email=${props.emailStore}`
@@ -35,7 +28,7 @@ useEffect(()=>{
 },[])
 
 async function signUp(email,firstName,lastName,password){
-  var userCreate = await fetch(`${ip}/sign-up`,{
+  var userCreate = await fetch(`${Constants.manifest.extra.backendURL}/sign-up`,{
   method:"POST",
   headers: {'Content-Type':'application/x-www-form-urlencoded'},
   body:`email=${email}&firstName=${firstName}&lastName=${lastName}&password=${password}`
